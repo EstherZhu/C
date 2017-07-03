@@ -2,7 +2,7 @@
 #include "data.h"
 #include "solve.h"
 #include <math.h>
-#include <omp.h>
+////#include <omp.h>
 #include <iostream>
 #include <fstream>
 #define _USE_MATH_DEFINES

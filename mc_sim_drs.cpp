@@ -6,7 +6,7 @@
 #include "opt.h"
 #include "regress.h"
 #include <sstream>
-#include <omp.h>
+////#include <omp.h>
 #include <sstream>
 #include <limits>
 
@@ -16,7 +16,7 @@ typedef std::numeric_limits< double > dbl;
 int main(int argc, char **argv){
 
 
-    int thr_num  = 14;
+    int thr_num  = 1;
     int n        = 7;
     int order    = 2;
     int ntrials = 100;
@@ -310,7 +310,7 @@ int main(int argc, char **argv){
 
         start += 8 * 18;
 
-        cout << "Trial " << t << ", thread" << omp_get_thread_num() << endl;
+        //cout << "Trial " << t << ", thread" << omp_get_thread_num() << endl;
 	dat1.reset();
     }
 

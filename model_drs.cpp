@@ -1,5 +1,5 @@
 #include <cmath>
-#include <omp.h>
+////#include <omp.h>
 #include "tauchen.h"
 #include "solve.h"
 
@@ -8,8 +8,8 @@ using namespace std;
         // Initialize model class by the sizes of state space grid
         dynprob::dynprob(int nbl, int nbpl, int nkl, int nkpl, int nal){
             // What did we just read in?
-            nb   = nbl,
-            nbint = nbpl,
+            nb   = 2,
+            nbint = 1,
             na    = nal,
             nk    = nkl,
             nkint = nkpl;
@@ -126,16 +126,19 @@ using namespace std;
               kint[i] = std::exp(kmin + (kmax - kmin) * (double) i / (nkint - 1));
           }
     
-          double bmax = firesale*exp(kmax);
-          double bmin = -bmax;
+          //double bmax = firesale*exp(kmax);
+          //double bmin = -bmax;
     
           for(int i = 0; i < nb; i++){
-              b[i] = bmin + (bmax - bmin) * (double) i / (nb - 1);
+              //b[i] = bmin + (bmax - bmin) * (double) i / (nb - 1);
+              b[i] = 0;
           }
           
          for(int i = 0; i < nbint; i++){
-              bint[i] = bmin + (bmax - bmin) * (double) i / (nbint - 1);
-          }
+             //bint[i] = bmin + (bmax - bmin) * (double) i / (nbint - 1);
+             bint[i] = 0;
+         }
+
         };
 
         /*-----------------------------------------------------------
@@ -228,14 +231,14 @@ using namespace std;
             int bindex[nbint], kindex[nkint];
             string title = "test/test";
             for(int bip = 0; bip < nbint; bip++){
-                if(bip < nbint - 1){
+                /*if(bip < nbint - 1){
                     if(bint[bip] >= b[underb+1]){
                         underb++;
                     }
-                }
+                }*/
 
-                bindex[bip] = underb;
-                wbint_temp[bip]  = (bint[bip] - b[underb]) / (b[underb+1] - b[underb]);
+                bindex[bip] = 0; //underb;
+                wbint_temp[bip]  = 0; //(bint[bip] - b[underb]) / (b[underb+1] - b[underb]);
             }
             
             for(int kip = 0; kip < nkint; kip++){
@@ -491,7 +494,7 @@ using namespace std;
 		simfile << endl;
 		}
 	}
-
+/*
          void dynprob::print_vecs(string title){
 
             //doublePrint(bs, title + "_bs.csv", ns);
@@ -507,3 +510,4 @@ using namespace std;
             doublePrint(A, title + "_A.csv", na);
             doublePrint(P, title + "_P.csv", na, na);
         }
+ */

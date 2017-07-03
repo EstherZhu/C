@@ -3,7 +3,7 @@
 #include "epf.h"
 #include "solve.h"
 #include "opt.h"
-#include <omp.h>
+//#include <omp.h>
 #define _USE_MATH_DEFINES
 using namespace std;
 
@@ -91,7 +91,7 @@ double objec_mom(matrix par, matrix m, matrix W, dynprob &res1, data &dat1, matr
 		parameter_update(par, res1);
 	    res1.vfi(1e-5,1e+16,3000,-1,0,0,thr_num);
     	res1.policy();
-            omp_set_num_threads(thr_num);
+            //omp_set_num_threads(thr_num);
 	    matrix did  = mom_tm_est(res1, dat1.nsim, dat1.nbr, dat1, randus, nrun);
 	    if(did.nrows() == mn.nrows()){
 	        mn = did;
@@ -176,7 +176,7 @@ double objec_epf_quad(matrix par, matrix m, matrix W, dynprob &res1, data &dat1,
 	    res1.policy();
 
 
-            omp_set_num_threads(thr_num);
+            //omp_set_num_threads(thr_num);
 	    matrix did  = epf_quad_est(res1, dat1.nsim, dat1.nbr, dat1, randus, nrun);
 	    matrix dist;
 	    //cout << did.ncols() << " " << did.nrows() << endl;
@@ -216,7 +216,7 @@ double objec_epf_cube(matrix par, matrix m, matrix W, dynprob &res1, data &dat1,
 		parameter_update(par, res1);
 	    res1.vfi(1e-5,1e+16,3000,-1,0,0,thr_num);
 	    res1.policy();
-omp_set_num_threads(thr_num);
+//omp_set_num_threads(thr_num);
 
 
 	    matrix did  = epf_cube_est(res1, dat1.nsim, dat1.nbr, dat1, randus, nrun);
@@ -277,7 +277,7 @@ double objec_epf_quad_trans(matrix par, matrix m, matrix W, dynprob &res1, data 
 	    res1.vfi(1e-5,1e+16,3000,-1,0,0,thr_num);
 	    res1.policy();
 
-omp_set_num_threads(thr_num);
+//omp_set_num_threads(thr_num);
 
 	    matrix did  = epf_quad_trans_est(res1, dat1.nsim, dat1.nbr, dat1, randus, nrun);
 	    matrix dist;
@@ -339,7 +339,7 @@ matrix (*auxiliary_est)(dynprob &, int, int, data &, matrix&, int), matrix (*aux
         res1.vfi(1e-5,1e+16,3000,-1,0,0, thr_num);
 
         res1.policy();
-omp_set_num_threads(thr_num);
+//omp_set_num_threads(thr_num);
 
             dat1.wipe();
 		    report  = auxiliary_est(res1, dat1.nsim, dat1.nbr, dat1, randus, nrun);

@@ -7,7 +7,7 @@
 #include "regress.h"
 #include "neldmead.h"
 #include <sstream>
-#include <omp.h>
+//#include <omp.h>
 #include <sstream>
 #include <mpi.h>
 #include <limits>
@@ -24,7 +24,7 @@ int main(int argc, char **argv){
   MPI_Init(&argc, &argv);
 
   // OpenMP threads
-  int thr_num = 14;
+  int thr_num = 1;
 
 	int id;
 	int nth;

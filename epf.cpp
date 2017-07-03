@@ -1,6 +1,6 @@
 #include "matrix.h"
 #include <cmath>
-#include <omp.h>
+//#include <omp.h>
 #include "epf.h"
 #include "regress.h"
 #include "data.h"

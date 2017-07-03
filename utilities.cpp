@@ -1,6 +1,6 @@
 #include "matrix.h"
 #include <math.h>
-#include <omp.h>
+//#include <omp.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>

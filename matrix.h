@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <limits>
-#include <omp.h>
+////#include <omp.h>
 #ifndef MAT_H
 #define MAT_H
 

@@ -6,7 +6,7 @@
 #include "opt.h"
 #include "regress.h"
 #include <sstream>
-#include <omp.h>
+//#include <omp.h>
 #include <sstream>
 #define _USE_MATH_DEFINES
 

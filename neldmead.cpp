@@ -1,5 +1,5 @@
 #include <cmath>
-#include <omp.h>
+//#include <omp.h>
 #include "matrix.h"
 #include "epf.h"
 #include "opt.h"

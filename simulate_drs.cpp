@@ -1,5 +1,5 @@
 #include <cmath>
-#include <omp.h>
+//#include <omp.h>
 #include "matrix.h"
 #include "solve.h"
 #include "data.h"
@@ -215,8 +215,8 @@ void sim(dynprob &prob, matrix &randus, data &dat){
       }
 
       k_low = 0;
-
-      for(int i = 1; i < nb; i++){
+        b_low = 0;
+      /*for(int i = 1; i < nb; i++){
         if(b_l >= b[i]){
           b_low++;
         }
@@ -229,7 +229,7 @@ void sim(dynprob &prob, matrix &randus, data &dat){
 
       if(b_low>nb-2){
         b_low = nb-2;
-      }
+      }*/
 
       k_low = 0;
 
@@ -252,7 +252,7 @@ void sim(dynprob &prob, matrix &randus, data &dat){
 
       i_low = k_low * nb  * na + b_low * na + z_low;
 
-      wb = (b_l - b[b_low])/(b[b_low+1]-b[b_low]);
+        wb = 0; //(b_l - b[b_low])/(b[b_low+1]-b[b_low]);
       wk = (k_l - k[k_low])/(k[k_low+1]-k[k_low]);
       wz = (z - A[z_low])/(A[z_low+1]-A[z_low]);
       

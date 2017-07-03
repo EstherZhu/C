@@ -1,5 +1,5 @@
 #include <cmath>
-#include <omp.h>
+////#include <omp.h>
 #include "tauchen.h"
 
 using namespace std;
@@ -9,9 +9,6 @@ using namespace std;
 #define SOLVE_H
 
 #define _USE_MATH_DEFINES
-
-
-
 
 
 void intPrint(int *p, string file, int rows, int cols = 0);
@@ -142,13 +139,13 @@ class dynprob{
             double maxd = 50, hdiff =50, mind = 50000, mcpd = 50, mcpdadd =0, convd = 50;
             int hiter = 0;
             thr_nums = thr_num;
-            omp_set_num_threads(thr_num);
+            //omp_set_num_threads(thr_num);
             double maxds[thr_num], minds[thr_num];
             
             //matrix vancient = vold;
             
             double total_expected_value_time = 0, total_maximization_time = 0, total_adjustment_time = 0;
-            double t = omp_get_wtime(), bigt = omp_get_wtime();
+            double t = 0, bigt = 0;
             
             //doubleCopy(vold, vnew, ns);
             int first;
@@ -163,7 +160,7 @@ class dynprob{
             int ca_per_thread = na * nc / thr_num ;
             int s_int_per_thread = s_int_per_thread_num / thr_num;
 
-            int this_thread;
+            int this_thread = 0;
 
 
             int nh = (int) (5 / (1 - beta));
@@ -176,7 +173,7 @@ class dynprob{
 
             #pragma omp parallel private(this_thread)
             {
-                this_thread = omp_get_thread_num();
+                this_thread = 0;
 
                 wipe_expected_value(this_thread, ca_per_thread, thr_num);
 		#pragma omp barrier
@@ -194,10 +191,10 @@ class dynprob{
                 #pragma omp master
                 {
                     if(verbose > 1){
-                      total_expected_value_time += omp_get_wtime() - t;
-                      cout << "EV time: " << omp_get_wtime() - t << std::endl;
+                      //total_expected_value_time += omp_get_wtime() - t;
+                      //cout << "EV time: " << omp_get_wtime() - t << std::endl;
                     }
-                    t = omp_get_wtime();
+                    //t = omp_get_wtime();
                     
                     for(int i = 0; i < thr_num; i++){
                                      maxds[i] = -INFINITY;
@@ -208,7 +205,7 @@ class dynprob{
 
                 #pragma omp parallel for private(this_thread)
                 for(int s = 0; s < ns; s++){
-                this_thread = omp_get_thread_num();
+                this_thread = 0;
                     double v = vold[s];
                     double u = -5000;
                     int c = 0;
@@ -234,11 +231,11 @@ class dynprob{
                 #pragma omp master
                 {
                     if(verbose>1){
-                      total_maximization_time += omp_get_wtime() - t;
-                      cout << "Maximization time: " << omp_get_wtime() - t << std::endl;
+                      //total_maximization_time += omp_get_wtime() - t;
+                      //cout << "Maximization time: " << omp_get_wtime() - t << std::endl;
                     }
 
-                    t = omp_get_wtime();
+                    //t = omp_get_wtime();
                     
                     maxd = maxds[0];
                     mind = minds[0];
@@ -300,8 +297,8 @@ class dynprob{
                     hiter = 0;
 
                     if(verbose>1){
-                      total_adjustment_time += omp_get_wtime() - t;
-                      cout << "Adjustment time: " << omp_get_wtime() - t << std::endl;
+                      //total_adjustment_time += omp_get_wtime() - t;
+                      //cout << "Adjustment time: " << omp_get_wtime() - t << std::endl;
                     }
                 }
 
@@ -336,7 +333,7 @@ class dynprob{
 
                 #pragma omp parallel private(this_thread)
                 {
-                    this_thread = omp_get_thread_num();
+                    this_thread = 0;
 
                     wipe_expected_value(this_thread, ca_per_thread, thr_num);
 		    #pragma omp barrier
@@ -355,7 +352,7 @@ class dynprob{
             }
             if(verbose>=0){
               cout <<  " iter: " << iter;
-              cout << " total time: " << omp_get_wtime() - bigt;
+              //cout << " total time: " << omp_get_wtime() - bigt;
               cout << " maximization time: " << total_maximization_time;
               cout << " expectation time: " << total_expected_value_time;
               cout << " adjustment time: " << total_adjustment_time;
